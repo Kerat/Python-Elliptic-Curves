@@ -52,12 +52,23 @@ class EllipticCurve:
         """
         Compute the double of a point (multiply it by two).
         :param point: The point to double (a 3 elements tuple).
-        :return: The result of the operation
+        :return: The double of the point given in parameter (a 3 elements tuple).
         """
         return (1,2,0)
 
     def opposite(self, point):
+        """
+        Compute the opposite of a point
+        :param point: The point to treat (a 3 elements tuple).
+        :return: The opposite of the point given in parameter (a 3 elements tuple).
+        """
         return (1,2,0)
 
     def multiply(self, point, n):
+        """
+        Multiply by n a given point.
+        :param point: The point to multiply (a 3 elements tuple).
+        :param n: The factor of the multiplication (an integer)
+        :return: The result point of the multiplication (a 3 elements tuple).
+        """
         return (1,2,0)
