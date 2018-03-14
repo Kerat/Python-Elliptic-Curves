@@ -38,3 +38,26 @@ class EllipticCurve:
             return True
         else:
             return False
+
+    def sum(self, point1, point2):
+        """
+        Compute the sum of two points.
+        :param point1: First point to sum (a 3 elements tuple).
+        :param point2: Second point to sum (a 3 elements tuple).
+        :return: The result point of the sum (a 3 elements tuple).
+        """
+        return (1,2,0)
+
+    def double(self, point):
+        """
+        Compute the double of a point (multiply it by two).
+        :param point: The point to double (a 3 elements tuple).
+        :return: The result of the operation
+        """
+        return (1,2,0)
+
+    def opposite(self, point):
+        return (1,2,0)
+
+    def multiply(self, point, n):
+        return (1,2,0)
