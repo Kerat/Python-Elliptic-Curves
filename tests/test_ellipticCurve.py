@@ -109,3 +109,16 @@ class TestEllipticCurve(TestCase):
         # TODO
         # Test uncorrect
         # TODO
+
+    def test_symmetric(self):
+        # check the symmetric methods
+        point = (3, 4, 0)
+        a = 1
+        b = 3
+        mod = 17
+
+        curve = EllipticCurve(a, b, point, mod)
+        inverse = curve.inv_modulo(-2, 17)
+        self.assertEqual(inverse, 8)
+
+
