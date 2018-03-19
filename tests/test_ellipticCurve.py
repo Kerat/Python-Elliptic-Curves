@@ -31,7 +31,7 @@ class TestEllipticCurve(TestCase):
         # Test a point not on the curve.
         with self.assertRaises(Exception):
             EllipticCurve(1, 3, (3, 4, 0), 17).sum((7, 4, 0), (2, 8, 0))
-        # Test a point not on the curve.
+        # Test 2 equals points.
         with self.assertRaises(Exception):
             EllipticCurve(1, 3, (3, 4, 0), 17).sum((3, 4, 0), (3, 4, 0))
         # Test 'the infinite point'
