@@ -60,15 +60,15 @@ class TestEllipticCurve(TestCase):
         with self.assertRaises(Exception):
             EllipticCurve(1, 3, (3, 4, 0), 17).double((7, 4, 0))
         # Test 'the infinite point'
-        self.assertEqual(EllipticCurve(1, 3, (3, 4, 0), 17).double((2, 8, 1)), (2, 8, 1))
+        self.assertEqual(EllipticCurve(1, 3, (3, 4, 0), 17).double((2, 8, 1)), (0, 0, 1))
         # Test correct with y1 != 0
         self.assertEqual(EllipticCurve(1, 3, (3, 4, 0), 17).double((3, 4, 0)), (2, 8, 0))
         # Test correct with y1 == 0
-        self.assertEqual(EllipticCurve(1, 1, (2, 1, 0), 3).double((1, 0, 0))[2], 1)
+        self.assertEqual(EllipticCurve(1, 1, (3, 1, 0), 3).double((1, 0, 0))[2], 1)
         # Test uncorrect with y1 != 0
         self.assertNotEqual(EllipticCurve(1, 3, (3, 4, 0), 17).double((3, 4, 0)), (3, 8, 0))
         # Test uncorrect with y1 == 0
-        self.assertNotEqual(EllipticCurve(1, 1, (2, 1, 0), 3).double((1, 0, 0))[2], 0)
+        self.assertNotEqual(EllipticCurve(1, 1, (3, 1, 0), 3).double((1, 0, 0))[2], 0)
 
     def test_opposite(self):
         # Test non valid values : float

@@ -58,10 +58,13 @@ class EllipticCurve:
         if point2[2] == 1:
             return point1
 
+        if point1[0] == point2[0] and point1[1] == point2[1]:
+            raise Exception("The points are equals !")
+
         lambda_1 = point2[1] - point1[1]
         lambda_2 = point2[0] - point1[0]
 
-        llambda = ( lambda_1 * self.inv_modulo(lambda_2, self.modulo)) % self.modulo
+        llambda = (lambda_1 * self.inv_modulo(lambda_2, self.modulo)) % self.modulo
 
         x3 = (llambda**2) % self.modulo - point1[0] - point2[0]
         x3 = x3 % self.modulo
@@ -77,7 +80,23 @@ class EllipticCurve:
         :param point: The point to double (a 3 elements tuple).
         :return: The double of the point given in parameter (a 3 elements tuple).
         """
-        return (1,2,0)
+        if not self.point_check(point):
+            raise Exception("The given point do not belong to the curve !")
+
+        if point[1] == 0 or point[2] == 1:
+            return 0, 0, 1
+
+        lambda_1 = 3 * point[0]**2 + self.a
+        lambda_2 = 2 * point[1]
+
+        llambda = (lambda_1 * self.inv_modulo(lambda_2, self.modulo)) % self.modulo
+
+        x3 = (llambda**2) % self.modulo - 2 * point[0] % self.modulo
+
+        y3 = llambda * (point[0] - x3) - point[1]
+        y3 = y3 % self.modulo
+
+        return x3, y3, 0
 
     def opposite(self, point):
         """
@@ -85,6 +104,7 @@ class EllipticCurve:
         :param point: The point to treat (a 3 elements tuple).
         :return: The opposite of the point given in parameter (a 3 elements tuple).
         """
+
         return (1,2,0)
 
     def multiply(self, point, n):
