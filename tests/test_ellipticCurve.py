@@ -99,8 +99,7 @@ class TestEllipticCurve(TestCase):
         with self.assertRaises(Exception):
             EllipticCurve(1, 3, (3, 4, 0), 17).multiply(("str", "str", 0), 5)
         # Test n=0
-        with self.assertRaises(Exception):
-            EllipticCurve(1, 3, (3, 4, 0), 17).multiply((3, 4, 0), 0)
+            self.assertRaises(EllipticCurve(1, 3, (3, 4, 0), 17).multiply((3, 4, 0), 0)[2], 1)
         # Test a point not on the curve.
         with self.assertRaises(Exception):
             EllipticCurve(1, 3, (3, 4, 0), 17).multiply((7, 4, 0), 5)
