@@ -48,10 +48,7 @@ class EllipticCurve:
 
         if not self.point_check(point1) or not self.point_check(point2):
             raise Exception("One or the two given points do not belong to the curve !")
-
-        if point1[0] == point2[0]:
-            return 0, 0, 1
-
+        
         if point1[2] == 1:
             return point2
 
@@ -60,6 +57,9 @@ class EllipticCurve:
 
         if point1[0] == point2[0] and point1[1] == point2[1]:
             raise Exception("The points are equals !")
+
+        if point1[0] == point2[0]:
+            return 0, 0, 1
 
         lambda_1 = point2[1] - point1[1]
         lambda_2 = point2[0] - point1[0]
