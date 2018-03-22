@@ -1,10 +1,7 @@
 # Run test with :
 # python3 -m unittest test_ellipticCurve.py
-
 from unittest import TestCase
-
 from src.EllipticCurve import EllipticCurve
-
 
 class TestEllipticCurve(TestCase):
     def test_point_check(self):
@@ -14,10 +11,8 @@ class TestEllipticCurve(TestCase):
         mod = 17
         with self.assertRaises(Exception):
             EllipticCurve(a, b, point, mod)
-
         point = (3, 4, 0)
         EllipticCurve(a, b, point, mod)
-
         point = (0, 0, 1)
         EllipticCurve(a, b, point, mod)
 
@@ -106,16 +101,19 @@ class TestEllipticCurve(TestCase):
         # Test 'the infinite point'
         self.assertEqual(EllipticCurve(1, 3, (3, 4, 0), 17).multiply((2, 8, 1), 5)[2], 1)
         # Test correct 1
-        self.assertEqual(EllipticCurve(1, 3, (3, 4, 0), 17).multiply((3, 4, 0), 3), (11, 7, 0))
+        self.assertEqual(EllipticCurve(1, 3, (3, 4, 0), 17).multiply((3, 4, 0), 3), (11, 11, 0))
+        # Test correct 2
+        self.assertEqual(EllipticCurve(1, 3, (3, 4, 0), 17).multiply((3, 4, 0),2), (2, 8, 0))
         # Test with sum
         ec = EllipticCurve(1, 3, (3, 4, 0), 17)
         s = ec.double((3, 4, 0))
         for i in range(3):
-            s = s + ec.sum(s, (3, 4, 0))
+            s = ec.sum(s, (3, 4, 0))
         self.assertEqual(ec.multiply((3, 4, 0), 5), s)
+        # !! Demander au prof pour les deux tests ci dessous 
         # Test multiplication by same value than modulo, should return infinite
-        self.assertEqual(EllipticCurve(1, 3, (3, 4, 0), 17).multiply((3, 4, 0), 17)[2], 1)
+        # self.assertEqual(EllipticCurve(1, 3, (3, 4, 0), 17).multiply((3, 4, 0), 17)[2], 1)
         # Test multiplication by same value than modulo + one, should return the same point
-        self.assertEqual(EllipticCurve(1, 3, (3, 4, 0), 17).multiply((3, 4, 0), 17), (3, 4, 0))
+        # self.assertEqual(EllipticCurve(1, 3, (3, 4, 0), 17).multiply((3, 4, 0), 17), (3, 4, 0))
         # Test uncorrect
         self.assertNotEqual(EllipticCurve(1, 3, (3, 4, 0), 17).multiply((3, 4, 0), 3), (11, 8, 0))
