@@ -114,7 +114,26 @@ class EllipticCurve:
         :param n: The factor of the multiplication (an integer)
         :return: The result point of the multiplication (a 3 elements tuple).
         """
-        return (1,2,0)
+        if not self.point_check(point):
+            raise Exception("The given point do not belong to the curve !")
+        P=(point[0],point[1],1)
+        if n==0:
+            return P
+        if n<0 :
+            N=-n
+            Q=self.opposite(point)
+        else:
+            N=n
+            Q=point
+        while N!=0:
+            if N%2 != 0:
+                P = self.sum(P,Q)
+            N=int(N/2.)
+            if N==0:
+                break
+            else:
+                Q=self.double(Q)
+        return P
 
     def bezout(self, a, b):
         """
