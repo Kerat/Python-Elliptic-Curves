@@ -21,3 +21,6 @@ class DiffieHelman:
     def compute_secret(self, foreign):
         secret = self.ec.multiply(foreign, self.pre_key)
         self.shared_secret = secret
+
+    def get_shared_key(self):
+        return self.shared_secret
