@@ -15,7 +15,7 @@ class DiffieHelman:
         self.i = 1
         self.ec = EllipticCurve(self.A, self.B, self.P, self.p)
         self.pre_key = randbelow(self.q - 1)
-        self.private_key = self.ec.multiply(self.P, self.pre_key)
+        self.shared_key = self.ec.multiply(self.P, self.pre_key)
         self.shared_secret = (0, 0, 1)
 
     def compute_secret(self, foreign):
@@ -23,4 +23,4 @@ class DiffieHelman:
         self.shared_secret = secret
 
     def get_shared_key(self):
-        return self.shared_secret
+        return self.shared_key

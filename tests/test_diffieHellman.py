@@ -3,6 +3,10 @@ from unittest import TestCase
 from src.DiffieHellman import *
 
 class TestDiffieHellman(TestCase):
+    def test_get_shared_key(self):
+        alice = DiffieHelman()
+        self.assertEqual(alice.get_shared_key(),alice.shared_key)
+
     def test_echange_secret(self):
         alice = DiffieHelman()
         bob = DiffieHelman()
