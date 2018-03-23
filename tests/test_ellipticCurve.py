@@ -3,7 +3,9 @@
 from unittest import TestCase
 from src.EllipticCurve import EllipticCurve
 
+
 class TestEllipticCurve(TestCase):
+
     def test_point_check(self):
         point = (7, 4, 0)
         a = 1

@@ -1,3 +1,4 @@
+# coding=utf-8
 class EllipticCurve:
     def __init__(self, a, b, point, modulo):
         """
@@ -52,7 +53,7 @@ class EllipticCurve:
         if point2[2] == 1:
             return point1
         if point1[0] == point2[0] and point1[1] == point2[1]:
-            raise Exception("The points are equals !")
+            return self.double(point1)
         if point1[0] == point2[0]:
             return 0, 0, 1
         lambda_1 = point2[1] - point1[1]
@@ -91,9 +92,9 @@ class EllipticCurve:
         if not self.point_check(point):
             raise Exception("The given point do not belong to the curve !")
         # Demander au prof ce qu'il est censé se passer avec le point à l'infini
-        if point[2]==1:
+        if point[2] == 1:
             return point
-        return (point[0],-point[1],0)
+        return point[0], -point[1], 0
 
     def multiply(self, point, n):
         """
