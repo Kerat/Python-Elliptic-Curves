@@ -15,5 +15,3 @@ class TestDiffieHellman(TestCase):
         bob.compute_secret(alice.get_shared_key())
         bob_secret = bob.shared_secret
         self.assertEqual(alice_secret,bob_secret)
-        print(alice_secret)
-        print(bob_secret)

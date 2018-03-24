@@ -1,9 +1,9 @@
 # coding: utf8
-from .EllipticCurve import EllipticCurve
+from EllipticCurve import EllipticCurve
 from secrets import randbelow
 
 
-class DiffieHelman:
+class DiffieHellman:
     def __init__(self):
         self.p = int("F1FD178C0B3AD58F10126DE8CE42435B3961ADBCABC8CA6DE8FCF353D86E9C03", 16)
         self.A = int("F1FD178C0B3AD58F10126DE8CE42435B3961ADBCABC8CA6DE8FCF353D86E9C00", 16)
