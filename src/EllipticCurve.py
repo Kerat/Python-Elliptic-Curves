@@ -1,4 +1,6 @@
+#!/usr/bin/env python3
 # coding=utf-8
+from math import sqrt
 class EllipticCurve:
     def __init__(self, a, b, point, modulo):
         """
@@ -39,6 +41,15 @@ class EllipticCurve:
         else:
             return False
 
+    def compute_y(self,x):
+        """
+        Return the y of a point on the curve for a given x.
+        :param x: The x of the point we are looking for.
+        :return: The y of the point we are looking for.
+        """
+        y_2 = (x ** 3 + self.a * x + self.b)%self.modulo
+        return y_2 ** (self.modulo+1/2)
+
     def sum(self, point1, point2):
         """
         Compute the sum of two points.
@@ -59,7 +70,7 @@ class EllipticCurve:
         lambda_1 = point2[1] - point1[1]
         lambda_2 = point2[0] - point1[0]
         llambda = (lambda_1 * self.inv_modulo(lambda_2, self.modulo)) % self.modulo
-        x3 = (llambda**2) % self.modulo - point1[0] - point2[0]
+        x3 = (llambda ** 2) % self.modulo - point1[0] - point2[0]
         x3 = x3 % self.modulo
         y3 = llambda * (point1[0] - x3) - point1[1]
         y3 = y3 % self.modulo
@@ -75,10 +86,10 @@ class EllipticCurve:
             raise Exception("The given point do not belong to the curve !")
         if point[1] == 0 or point[2] == 1:
             return 0, 0, 1
-        lambda_1 = 3 * point[0]**2 + self.a
+        lambda_1 = 3 * point[0] ** 2 + self.a
         lambda_2 = 2 * point[1]
         llambda = (lambda_1 * self.inv_modulo(lambda_2, self.modulo)) % self.modulo
-        x3 = (llambda**2)%self.modulo - (2*point[0])%self.modulo
+        x3 = (llambda ** 2) % self.modulo - (2 * point[0]) % self.modulo
         y3 = llambda * (point[0] - x3) - point[1]
         y3 = y3 % self.modulo
         return x3, y3, 0
@@ -105,24 +116,24 @@ class EllipticCurve:
         """
         if not self.point_check(point):
             raise Exception("The given point do not belong to the curve !")
-        P=(point[0],point[1],1)
-        if n==0:
-            return P
-        if n<0 :
-            N=-n
-            Q=self.opposite(point)
+        p = (point[0], point[1], 1)
+        if n == 0:
+            return p
+        if n < 0:
+            _n = -n
+            q = self.opposite(point)
         else:
-            N=n
-            Q=point
-        while N!=0:
-            if N%2 != 0:
-                P = self.sum(P,Q)
-            N=int(N/2.)
-            if N==0:
+            _n = n
+            q = point
+        while _n != 0:
+            if _n % 2 != 0:
+                p = self.sum(p, q)
+            _n = int(_n / 2.)
+            if _n == 0:
                 break
             else:
-                Q=self.double(Q)
-        return P
+                q = self.double(q)
+        return p
 
     def bezout(self, a, b):
         """
@@ -135,7 +146,7 @@ class EllipticCurve:
         if a == 0 and b == 0:
             return 0, 0, 0
         if b == 0:
-            return int(a/abs(a)), 0, abs(a)
+            return int(a / abs(a)), 0, abs(a)
         (u, v, p) = self.bezout(b, a % b)
         return v, (u - v * int(a / b)), p
 

@@ -1,5 +1,5 @@
 #coding: utf8
-from DiffieHellman import *
+from .DiffieHellman import DiffieHellman
 
 def echange_de_clef():
     """

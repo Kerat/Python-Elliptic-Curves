@@ -1,5 +1,6 @@
+#!/usr/bin/env python3
 # coding: utf8
-from EllipticCurve import EllipticCurve
+from .EllipticCurve import EllipticCurve
 from secrets import randbelow
 
 
